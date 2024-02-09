@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import AboutComponent from "./components/AboutComponent";
+import CompanyProfile from "./components/CompanyProfile";
+import HomeComponent from "./components/HomeComponent";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
+import { MyContextProvider } from "./context";
 
 function App() {
+  const companyData = {
+    name: "PT Indodev Niaga Internet",
+    address: "Jl Tegal Rotan Raya",
+  };
+
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MyContextProvider>
+      <div className="App">
+        <Router>
+          <Routes>
+            <Route path="/" element={<HomeComponent />} />
+            <Route path="/about" element={<AboutComponent />} />
+            <Route
+              path="/company"
+              element={<CompanyProfile companyData={companyData} />}
+            />
+          </Routes>
+        </Router>
+      </div>
+    </MyContextProvider>
   );
 }
 
